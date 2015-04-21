@@ -30,16 +30,35 @@ let mapleader=","
 nnoremap <Space> za
 
 " Quick ESC
-imap gg <ESC>
+imap qq <ESC>
 
-" copy pasterino
-" set pastetoggle=<F12>
-" buffer switch
-nnoremap <F5> :buffers<CR>:buffer<Space>
-" This is nice but a little bit slow
-nnoremap <F4> :bw<CR>								" delete current buffer
-nnoremap <F6> :ls<CR>								" browse running buffers
+" --- Editing Multiple lines in vim
+" 1. Navigate to where you want the first quote to be.
+" 2. Enter visual-block-mode which is Ctrl+v, then select the lines you want
+"    to get affected, G to go to the bottom of the file.
+" 3. Hit I"<ESC> or I<any character/pattern you want to insert><ESC>
+" 4. Move to the next spot you want to insert a " or <any char>.
+" 5. You want to repeat what you just did so a simple '.' will suffice.
+
+" --- Working with multiple files in vim
+" :e filename - Edit a file in a new buffer
+" :bnext (or :bn) - go to next buffer
+" :bprev (of :bp) - go to previous buffer
+" :bd - delete a buffer (close a file)
+" :sp filename - Open a file in a new buffer and split window
+" ctrl+ws - Split windows
+" ctrl+ww - switch between windows
+" ctrl+wq - Quit a window
+" ctrl+wv - Split windows vertically
+"
+nnoremap <F2> :bp<CR>								" go to previous buffer
+nnoremap <F3> :bn<CR>								" go to next buffer
+nnoremap <F4> <C-W>w								" handy to scroll between open windows
+nnoremap <F5> :ls<CR>								" browse running buffers
+nnoremap <F6> :buffers<CR>:buffer<Space>
+nnoremap <F7> :bw<CR>								" delete current buffer
 nnoremap gb :buffers<CR>:sb<Space>
+
 
 " Literally remove arrow keys for discipline :/
 " Warning! not for the WEAK!
@@ -53,9 +72,9 @@ noremap <Right> <NOP>
 " noremap k <NOP>
 " noremap l <NOP>
 
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 "" Wrap visually selected text in parantheses
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 vnoremap ((  <ESC>`>a)<ESC>`<i(<ESC>
 vnoremap ))  <ESC>`<i(<ESC>`><right>a)<ESC>
 vnoremap {{  <ESC>`>a}<ESC>`<i{<ESC>
