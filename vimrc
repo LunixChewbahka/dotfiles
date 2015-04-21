@@ -30,7 +30,7 @@ let mapleader=","
 nnoremap <Space> za
 
 " Quick ESC
-imap jj <ESC>
+imap gg <ESC>
 
 " copy pasterino
 " set pastetoggle=<F12>
