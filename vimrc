@@ -13,15 +13,10 @@ set modeline modelines=5
 set foldmethod=indent
 set ruler
 set title
-
 set mouse=a
-
 set backspace=indent,eol,start	" let the backspace key work 'normally' "
-
 set nobackup
 set nowritebackup
-
-
 
 " mapleader is "\" by default
 let mapleader=","
@@ -258,6 +253,16 @@ let g:UltiSnipsEditSplit='vertical'
 " Settings for CtrlP
 " -----------------------------------------------------
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+" let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+		\ 'dir':		'\v[\/]\.(git|hg|svn)$',
+		\ 'file':		'\v\.(exe|so|dll)$',
+		\ 'link':		'some_bad_symbolic_links',
+		\ }
+
+let g:ctrlp_user_command = 'find %s -type f'
+
 
 "" Settings for TagBar
 nnoremap <F12> :TagbarToggle<cr>
