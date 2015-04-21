@@ -6,9 +6,9 @@
 
 # ---------------------------- Variables --------------------------------------
 
-dir=~/dotfiles																	# dotfiles directory
-olddir=~/dotfiles_old														# old dotfiles backup directory
-files="bashrc zshrc tcshrc vimrc vim oh-my-zsh" # files/folders to be symlinked
+dir=~/dotfiles									# dotfiles directory
+olddir=~/dotfiles_old						# old dotfiles backup directory
+files="bashrc vimrc"						# files/folders to be symlinked
 
 # ------------------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ echo "...done"
 # ----------- then create symlinks; backup
 for file in $files; do
 		echo "Moving any existing dotfiles from ~ to $olddir"
-		mv ~./$file ~/dotfiles_old/
+		mv ~/.$file ~/dotfiles_old/
 		echo "Creating symlink to $file in home directory."
-		ln -s $dir/$file ~/.file
+		ln -s $dir/$file ~/.$file
 done
