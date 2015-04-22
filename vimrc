@@ -1,11 +1,11 @@
 " Global Config
-syntax on												" turn on syntax highlighting
+syntax on						" turn on syntax highlighting
 syntax enable
-filetype off											" enables filtype specific plugins
+filetype off				" enables filtype specific plugins
 
 set rnu
 set nonu
-set nocompatible                " improve thyself
+set nocompatible		" improve thyself
 set tabstop=2
 set shiftwidth=4
 set softtabstop=4
@@ -57,10 +57,15 @@ nnoremap gb :buffers<CR>:sb<Space>
 
 " Literally remove arrow keys for discipline :/
 " Warning! not for the WEAK!
-noremap <Up>		<NOP>
-noremap <Down>	<NOP>
-noremap <Left>	<NOP>
-noremap <Right> <NOP>
+" P.S. I like to punish myself
+noremap			<Up>				<NOP>
+noremap			<Down>			<NOP>
+noremap			<Left>			<NOP>
+noremap			<Right>			<NOP>
+inoremap		<Up>				<NOP>
+inoremap		<Down>			<NOP>
+inoremap		<Left>			<NOP>
+inoremap		<Right>			<NOP>
 " Remove h, j, k, l - might aswell use ge commands w,b,e
 " noremap h <NOP>
 " noremap j <NOP>

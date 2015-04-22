@@ -153,6 +153,11 @@ export PATH=$PATH:/opt/jdk1.8.0_45/bin:/opt/jdk1.8.0_45/bin/jar/bin
 # ROS Setup Environment
 # Override Operating system default variables
 export ROS_OS_OVERRIDE="ubuntu:trusty"
+# 1. Now that we have the ROS_OS_OVERRIDE value replaced
+# 2. Open terminal. Open up python interactive shell. Type the ff:
+#		>> import.os
+#		>> "ROS_OS_OVERRIDE" in os.environ
+#		>> True        // Note this should return true if not, recheck the export variable in bashrc is correctly registered/ maybe a typo.
 
 # --- Sources list ---
 # ROS Source
