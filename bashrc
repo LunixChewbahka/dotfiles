@@ -117,11 +117,12 @@ fi
 # User defined settings
 # ---------------------------------------------------------------------------------------------------------------
 
-# Set gnome-terminal to use 256 colors
+# --- Set gnome-terminal to use 256 colors
 if [ "$TERM" == "xterm" ]; then
 		export TERM=xterm-256color
 fi
 
+# --- Aliases ---
 # User defined Aliases:
 alias sindir='cd /media/lunixchewbahka/CE9A12419A12270D/Users/Chaos\ Theory/My\ Documents/Software_Development/'
 # export dirsin=/media/lunixchewbahka/CE9A12419A12270D/Users/Chaos\ Theory/My\ Documents/Software_Development
@@ -135,8 +136,7 @@ alias py343='/opt/python3.4.3/bin/python3.4'
 alias open='xdg-open'
 
 
-# Export / similar to environmental variables in windows
-
+# --- Export / similar to environmental variables in windows
 # webots directory
 export WEBOTS_HOME=~/.webots
 
@@ -149,3 +149,20 @@ export PATH=$PATH:~/.local/bin
 export JAVA_HOME=/opt/jdk1.8.0_45/bin/java
 export JRE_HOME=/opt/jdk1.8.0_45/bin/jar
 export PATH=$PATH:/opt/jdk1.8.0_45/bin:/opt/jdk1.8.0_45/bin/jar/bin
+
+# ROS Setup Environment
+# Override Operating system default variables
+export ROS_OS_OVERRIDE="ubuntu:trusty"
+
+# --- Sources list ---
+# ROS Source
+# /* to find available packages */
+#		$ apt-cache search ros-indigo
+# /* initialize setup */
+#		$ sudo rosdep init
+#		$ rosdep update
+# /* command for downloading many source trees for ROS packages */
+#		$ rosinstall
+source /opt/ros/indigo/setup.bash
+# add your project directory sources here; 1 project = 1 source
+source ~/Documents/ROS/catkin_ws/devel/setup.sh
