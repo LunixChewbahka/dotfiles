@@ -1,31 +1,126 @@
-" Global Config
-syntax on						" turn on syntax highlighting
-syntax enable
-filetype off				" enables filtype specific plugins
+" --- Global Config
 
+" Turn on syntax highlighting
+syntax on
+
+" Enables filtype specific plugins
+filetype off
+
+" Enables line number, you can have foure combinations
+" for more more info about the combo see :help number_relativenumber
+set nu
 set rnu
-set nonu
-set nocompatible		" improve thyself
-set tabstop=2
+
+" improve thyself, vi improved get it?
+set nocompatible
+
+" Use spaces instead of tabs
+set expandtab
+
+" Be smart when using tabs
+set smarttab
+
+" 1 tab == 4 spaces
+set tabstop=4
 set shiftwidth=4
-set softtabstop=4
+
+" Auto indent, Smart indent, Wrap lines respectively
+set ai
+set si
+set wrap
+
+" For security reasons ?
 set modeline modelines=5
+
+" Folding scheme
 set foldmethod=indent
+
+" Always show current position
 set ruler
+
+" Set title bar on terminal tab the same as the file
 set title
+
+" Enable mouse???
 set mouse=a
-set backspace=indent,eol,start	" let the backspace key work 'normally' "
+
+" Let the backspace key work 'normally'
+" Configure backspace so it acts as it should act
+set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
+
+" Turn on the Wild Menu
+set wildmenu
+
+" Ignore compiled files completely
+set wildignore=*.o,*~,*.pyc
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch
+
+" Don't redraw while exectuing macros (good performance config)
+set lazyredraw
+
+" Show matching bracket when text indicator is hovering over them
+set showmatch
+" Set how many tenths of a second to blink when matching brackets
+set mat=2
+
+" No annoying sound on errors please,
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Set utf8 as a standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+" I prefer the modern way
 set nobackup
 set nowritebackup
+set noswapfile
 
+" --- Set comments = italics, in gnome-terminal
+" type the following in your gnome-terminal
+" $ echo -e "\e[3mfoo\e[23m"
+" you should see an italicized "foo"
+" ^[ = single char, can be inserted by typing <Ctrl>V<Esc>.
+set t_zh=^[[3m
+set t_zr=^[[23m
+highlight Comment cterm=bold ctermfg=7 guifg=#FF005F guibg=gray
+
+" --- Sets how many lines of history VIM has to remember
+set history=500
+
+" --- Set to autp read when a file is changed from the outside
+set autoread
+
+" --- With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
 " mapleader is "\" by default
 let mapleader=","
+let g:mapleader = ","
+
+" --- Fast saving
+nmap <leader>w :w!<CR>
 
 " Fold Settings
 nnoremap <Space> za
 
 " Quick ESC
-imap qq <ESC>
+imap ;; <ESC>
 
 " --- Editing Multiple lines in vim
 " 1. Navigate to where you want the first quote to be.
@@ -207,11 +302,11 @@ map T <Leader><Leader>f
 " -----------------------------------------------------
 function! g:ToggleNuMode()
 	if &nu == 1
-	    set rnu
-	    set nonu
-	else
 	    set nu
-		set nornu
+	    set rnu
+	else
+	    set rnu
+		set nu
 	endif
 endfunction
 nnoremap <silent><C-L> :call g:ToggleNuMode()<cr>
@@ -275,18 +370,21 @@ nnoremap <F12> :TagbarToggle<cr>
 "" Settings for vim-better-whitespace
 highlight ExtraWhitespace ctermbg=White
 
-"" Settings for python-mode
+" --- Settings for python-mode
 let g:pymode_rope = 1
 
 let g:pymode_doc = 1
 let g:pymode_doc_key = 'K'
 
 let g:pymode_lint = 1
-let g:pymode_lint_checker = "pyflakes,pep8"
+let g:pymode_lint_checker = "pep8"
 
 let g:pymode_lint_write = 1
 
-"" Settings for pydiction
+" [pep8] error ignore list
+let g:pymode_lint_ignore="E226,E302,E41"
+
+" --- Settings for pydiction
 let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 let g:pydiction_menu_height = 5
 
