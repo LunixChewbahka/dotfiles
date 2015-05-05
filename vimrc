@@ -82,10 +82,14 @@ set t_vb=
 set tm=500
 
 " Set utf8 as a standard encoding and en_US as the standard language
-set encoding=utf8
+" set encoding=utf8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
+
+" Set noshowmode to remove "User defined completion(^U^N^P)" notification
+" set noshowmode
+" In addition, if you want to h
 
 " I prefer the modern way
 set nobackup
@@ -120,7 +124,7 @@ nmap <leader>w :w!<CR>
 nnoremap <Space> za
 
 " Quick ESC
-imap ;; <ESC>
+imap jj <ESC>
 
 " --- Editing Multiple lines in vim
 " 1. Navigate to where you want the first quote to be.
@@ -153,11 +157,11 @@ nnoremap gb :buffers<CR>:sb<Space>
 " Literally remove arrow keys for discipline :/
 " Warning! not for the WEAK!
 " P.S. I like to punish myself
-noremap			<Up>				<NOP>
+noremap			<Up>			<NOP>
 noremap			<Down>			<NOP>
 noremap			<Left>			<NOP>
 noremap			<Right>			<NOP>
-inoremap		<Up>				<NOP>
+inoremap		<Up>			<NOP>
 inoremap		<Down>			<NOP>
 inoremap		<Left>			<NOP>
 inoremap		<Right>			<NOP>
@@ -189,7 +193,9 @@ autocmd InsertLeave * highlight Cursorline cterm=NONE ctermbg=DarkGreen ctermfg=
 " Set comments to italic
 
 " Automatic formatting
-autocmd BufWritePre *.go :%s/\s\+$//e
+" autocmd BufWritePre *.go :%s/\s\+$//e
+" Go specific settings
+au BufNewFile,BufRead *.go set ft=go
 
 " Format the entire file
 nmap <leader>fef ggVG=
@@ -197,13 +203,11 @@ nmap <leader>fef ggVG=
 " Python specific settings
 au BufNewFile,BufRead *.py set ft=python
 		\ tabstop=4
-		\ softtabstop=4
+        \ softtabstop=4
 		\ shiftwidth=4
 		\ smarttab
 		\ expandtab
-
-" Go specific settings
-au BufNewFile,BufRead *.go set ft=go
+        \ nosmartindent
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -232,9 +236,9 @@ Bundle 'flazz/vim-colorschemes'
 " Bundle 'davidhalter/jedi-vim'							" ycm already has this built in
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
-Bundle 'klen/python-mode'
-Bundle 'rkulla/pydiction'
-Bundle 'nvie/vim-flake8'
+" Bundle 'klen/python-mode'
+" Bundle 'rkulla/pydiction'
+" Bundle 'nvie/vim-flake8'
 Bundle 'ntpeters/vim-better-whitespace'
 Bundle 'octol/vim-cpp-enhanced-highlight'
 
@@ -253,6 +257,21 @@ filetype plugin indent on		" required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+" --- Insert repeating characters in vim
+"  <C-o> is used to issure normal commands without leaving INSERT MODE.
+"  '8' the repetition
+"  'i' to insert.
+"  'a' the letter you want to type.
+"  <Esc> to leave INSERT mode.
+"  in short <C-o>8ia<Esc>
+function! Repeat()
+    let times = input("Count: ")
+    let char  = input("Char: ")
+    exe ":normal a" . repeat(char, times)
+endfunction
+" map to hotkey
+imap <C-u><C-o>:call Repeat()<CR>
+
 " Settings for solarized
 " let g:solarized_termcolors=256
 if has('gui_running')
@@ -260,13 +279,15 @@ if has('gui_running')
 else
 		set t_Co=256
 		set background=dark
-		colorscheme monokain
+		colorscheme molokai
 endif
 
 " Settings for YouCompleteMe
 " let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 " let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_register_as_syntastic_checker = 1
+let g:ycm_seed_identifiers_with_syntax = 1
 
 "Settings for vim-indent-guides
 " ~Terminal mode
@@ -274,8 +295,8 @@ let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cp
 " hi IndentGuidesEven  ctermbg=darkgrey
 let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_start_level = 1
-let g:indent_guides_guide_size = 4
-let g:indent_guides_auto_colors = 0
+let g:indent_guides_guide_size = 1
+let g:indent_guides_auto_colors = 1
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd	guibg=red   ctermbg=Grey
 autocmd VimEnter,Colorscheme * :hi indentGuidesEven guibg=green ctermbg=DarkGrey
 
@@ -300,16 +321,16 @@ map T <Leader><Leader>f
 " Thanks to joequery ^^,
 " use Ctrl+L to toggle the line number counting method
 " -----------------------------------------------------
-function! g:ToggleNuMode()
-	if &nu == 1
-	    set nu
-	    set rnu
-	else
-	    set rnu
-		set nu
-	endif
-endfunction
-nnoremap <silent><C-L> :call g:ToggleNuMode()<cr>
+"function! g:ToggleNuMode()
+"	if &nu == 1
+"	    set nu
+"	    set rnu
+"	else
+"	    set rnu
+"		set nu
+"	endif
+"endfunction
+"nnoremap <silent><C-L> :call g:ToggleNuMode()<cr>
 
 " -----------------------------------------------------
 " bling/vim-airline Configuration
@@ -370,23 +391,28 @@ nnoremap <F12> :TagbarToggle<cr>
 "" Settings for vim-better-whitespace
 highlight ExtraWhitespace ctermbg=White
 
-" --- Settings for python-mode
-let g:pymode_rope = 1
-
-let g:pymode_doc = 1
-let g:pymode_doc_key = 'K'
-
-let g:pymode_lint = 1
-let g:pymode_lint_checker = "pep8"
-
-let g:pymode_lint_write = 1
-
-" [pep8] error ignore list
-let g:pymode_lint_ignore="E226,E302,E41"
-
-" --- Settings for pydiction
-let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
-let g:pydiction_menu_height = 5
+"" --- Settings for python-mode
+"let g:pymode_rope = 0
+"let g:pymode_rope_autoimport = 0
+"
+"let g:pymode_doc = 1
+"let g:pymode_doc_key = 'K'
+"
+"let g:pymode_lint = 1
+"let g:pymode_lint_checker = "pep8"
+"
+"let g:pymode_lint_write = 1
+"
+"let g:pymode_rope_lookup_project = 0
+"let g:pymode_rope_complete_on_dot = 0
+"let g:pymode_rope_completion = 0
+"
+"" [pep8] error ignore list
+"let g:pymode_lint_ignore="E226,E302,E41"
+"
+"" --- Settings for pydiction
+"let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
+"let g:pydiction_menu_height = 5
 
 "" Settings for vim-cpp-enhanced-highlight
 let g:cpp_class_scope_highlight = 1

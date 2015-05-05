@@ -137,6 +137,11 @@ alias open='xdg-open'
 
 
 # --- Export / similar to environmental variables in windows
+# Pyenv environmental var configuration
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 # webots directory
 export WEBOTS_HOME=~/.webots
 
@@ -144,6 +149,9 @@ export WEBOTS_HOME=~/.webots
 export PATH=$PATH:~/.local/bin
 # alternative way, by adding the directory to the end of the path
 # export PATH=~/.local/bin:$PATH
+
+# Set the environment variable PYTHONPATH to /path/to/python-sdk
+export PYTHONPATH=${PYTHONPATH}:'/opt/Aldebaran/Choregraphe Suite 2.1/lib'
 
 # Java Setup Environmental Variables
 export JAVA_HOME=/opt/jdk1.8.0_45/bin/java
@@ -159,6 +167,14 @@ export ROS_OS_OVERRIDE="ubuntu:trusty"
 #		>> "ROS_OS_OVERRIDE" in os.environ
 #		>> True        // Note this should return true if not, recheck the export variable in bashrc is correctly registered/ maybe a typo.
 
+# Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
+export COCOS_CONSOLE_ROOT=/home/lunixchewbahka/Documents/Gemu/cocos2d-x/tools/cocos2d-console/bin
+export PATH=$COCOS_CONSOLE_ROOT:$PATH
+
+# Add environment variable COCOS_TEMPLATES_ROOT for cocos2d-x
+export COCOS_TEMPLATES_ROOT=/home/lunixchewbahka/Documents/Gemu/cocos2d-x/templates
+export PATH=$COCOS_TEMPLATES_ROOT:$PATH
+
 # --- Sources list ---
 # ROS Source
 # /* to find available packages */
@@ -171,3 +187,6 @@ export ROS_OS_OVERRIDE="ubuntu:trusty"
 source /opt/ros/indigo/setup.bash
 # add your project directory sources here; 1 project = 1 source
 source ~/Documents/ROS/catkin_ws/devel/setup.sh
+
+# source file for virtualenvwrapper - I installed it using root
+source "/usr/local/bin/virtualenvwrapper.sh"
