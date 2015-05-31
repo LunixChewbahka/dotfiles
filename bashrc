@@ -117,6 +117,17 @@ fi
 # User defined settings
 # ---------------------------------------------------------------------------------------------------------------
 
+# --- script for navigating through multiple directories
+# using pushd / popd
+alias dirs='dirs -v'
+pd () {
+    if [ "$1" ]; then
+        pushd "${1/#[0-9]*/+$1}";
+    else
+        pushd;
+    fi > /dev/null
+}
+
 # --- Set gnome-terminal to use 256 colors
 if [ "$TERM" == "xterm" ]; then
 		export TERM=xterm-256color
@@ -125,13 +136,23 @@ fi
 # --- Aliases ---
 # User defined Aliases:
 alias sindir='cd /media/lunixchewbahka/CE9A12419A12270D/Users/Chaos\ Theory/My\ Documents/Software_Development/'
+alias vrl=' cd /media/lunixchewbahka/CE9A12419A12270D/"Documents and Settings"/"Chaos Theory"/Documents/Software_Development/Virtual_Reference_Library'
 # export dirsin=/media/lunixchewbahka/CE9A12419A12270D/Users/Chaos\ Theory/My\ Documents/Software_Development
 # alias for python2.x.x (that comes with the OS)
-alias py27='/usr/bin/python2.7'
+alias py276='/usr/bin/python2.7'
+# alias for python-2.7.9 (path: $HOME/.pyenv/versions/python2.7.9)
+alias py279='~/.pyenv/versions/2.7.9/bin/python2.7'
+# alias for pip-2.7.9 (path: $HOME/.pyenv/python2.7/pip')
+alias pip279='~/.pyenv/versions/2.7.9/bin/pip2.7'
+# alias for (virtual)pip279
+alias pipvenv279='~/.pyenv/versions/venv279/bin/pip2'
 # alias for python3.4 base install (that comes with the OS)
-alias py34='/usr/bin/python3.4'
+alias py340='/usr/bin/python3.4'
 # alias for python-3.4.3 alt install
 alias py343='/opt/python3.4.3/bin/python3.4'
+# alias for pip-3.4.3
+alias pipvenv343='~/.pyenv/versions/venv343/bin/pip3'
+
 # alias for openning pdf documents and other files in linux
 alias open='xdg-open'
 
@@ -151,7 +172,7 @@ export PATH=$PATH:~/.local/bin
 # export PATH=~/.local/bin:$PATH
 
 # Set the environment variable PYTHONPATH to /path/to/python-sdk
-export PYTHONPATH=${PYTHONPATH}:'/opt/Aldebaran/Choregraphe Suite 2.1/lib'
+export PYTHONPATH=${PYTHONPATH}:'/opt/Aldebaran/Choregraphe Suite 2.1/lib/naoqi'
 
 # Java Setup Environmental Variables
 export JAVA_HOME=/opt/jdk1.8.0_45/bin/java
